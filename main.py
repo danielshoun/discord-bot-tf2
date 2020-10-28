@@ -34,7 +34,7 @@ async def on_message(message):
                 await message.channel.send("Probability must be greater than 0.")
             else:
                 probability = new_prob
-                if probability = 0:
+                if probability == 0:
                     await mesage.channel.send("I'll stop talking completely until you change the probability again.")
                 else:
                     await message.channel.send(f"I'll now generate text approximately 1 in every {probability} messages.")

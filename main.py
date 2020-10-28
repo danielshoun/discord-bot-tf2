@@ -41,7 +41,8 @@ async def on_message(message):
     else:
         if probability != 0:
             if random.randint(1, probability) == 1:
-                reply = gpt2.generate(sess, length=100, return_as_list=True)[0]
+                length = random.randint(25, 100)
+                reply = gpt2.generate(sess, length=length, return_as_list=True)[0]
                 await message.channel.send(reply)
 
 client.run(TOKEN)

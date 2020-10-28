@@ -6,7 +6,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-TOKEN = os.getenv("DISCORD_TOKEN")
+discord_token = os.getenv("DISCORD_TOKEN")
 
 probability = 50
 
@@ -29,11 +29,11 @@ async def on_message(message):
         return
     if message.content.startswith("/probability "):
         try:
-            newProb = int(message.content.split(" ")[1])
-            if newProb < 0:
+            new_prob = int(message.content.split(" ")[1])
+            if new_prob < 0:
                 await message.channel.send("Probability must be greater than 0.")
             else:
-                probability = newProb
+                probability = new_prob
                 if probability = 0:
                     await mesage.channel.send("I'll stop talking completely until you change the probability again.")
                 else:
@@ -48,4 +48,4 @@ async def on_message(message):
                 reply = gpt2.generate(sess, length=length, return_as_list=True)[0]
                 await message.channel.send(reply)
 
-client.run(TOKEN)
+client.run(discord_token)

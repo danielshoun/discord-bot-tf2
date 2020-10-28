@@ -34,7 +34,10 @@ async def on_message(message):
                 await message.channel.send("Probability must be greater than 0.")
             else:
                 probability = newProb
-                await message.channel.send("Will now generate text approximately 1 every " + str(probability) + " messages.")
+                if probability = 0:
+                    await mesage.channel.send("I'll stop talking completely until you change the probability again.")
+                else:
+                    await message.channel.send(f"I'll now generate text approximately 1 in every {probability} messages.")
         except:
             await message.channel.send("Could not parse a number from your message.")
 

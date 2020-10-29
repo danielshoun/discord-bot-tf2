@@ -9,6 +9,7 @@ load_dotenv()
 discord_token = os.getenv("DISCORD_TOKEN")
 
 probability = 50
+possible_endings = ["\n", ".", "!", "?"]
 
 sess = gpt2.start_tf_sess()
 gpt2.load_gpt2(sess)
@@ -44,8 +45,15 @@ async def on_message(message):
     else:
         if probability != 0:
             if random.randint(1, probability) == 1:
-                length = random.randint(25, 100)
+                length = random.randint(10, 100)
                 reply = gpt2.generate(sess, length=length, return_as_list=True)[0]
+                global possible_endings
+                latest_ending = -1
+                for ending in possible_endings:
+                    if reply.rfind(ending) > latest_ending:
+                        latest_ending = reply.rfind(ending)
+                if latest_ending != -1:
+                    reply = reply[:latest_ending]
                 await message.channel.send(reply)
 
 client.run(discord_token)
